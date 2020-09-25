@@ -131,18 +131,6 @@ class SampleSize(object):
         return d['num_tokens']
 
 
-class Filter(object):
-
-    def __init__(self, min_len, max_len) -> None:
-        super().__init__()
-        self.min_len = min_len
-        self.max_len = max_len
-
-    def __call__(self, d):
-        return min(d['num_tokens_x'], d['num_tokens_y']) >= self.min_len and \
-               max(d['num_tokens_x'], d['num_tokens_y']) <= self.max_len
-
-
 class DictCollator(object):
 
     def __init__(self, sv: Vocabulary, tv: Vocabulary) -> None:
@@ -161,32 +149,6 @@ class DictCollator(object):
             'batch_tokens_x': x.shape[0] * x.shape[1],
             'batch_tokens_y': y.shape[0] * y.shape[1],
             'num_samples': len(samples)
-        }
-
-
-class FileCollator(object):
-    def __init__(self, sv: Vocabulary, tv: Vocabulary):
-        self._sv = sv
-        self._tv = tv
-
-    def __call__(self, filenames):
-        fx, fy = filenames[0]
-        ds_x = lunas.TextLine(fx).map(lambda x: self._sv.lookup(x))
-        ds_y = lunas.TextLine(fy).map(lambda y: self._tv.lookup(y))
-        xs = list(ds_x)
-        ys = list(ds_y)
-        num_tokens_x, num_tokens_y = sum(x.size for x in xs), sum(y.size for y in ys)
-        xs = utils.pack(xs, self._sv.pad_id, torch.long)
-        ys = utils.pack(ys, self._tv.pad_id, torch.long)
-
-        return {
-            'x': xs,
-            'y': ys,
-            'true_tokens_x': num_tokens_x,
-            'true_tokens_y': num_tokens_y,
-            'batch_tokens_x': xs.numel(),
-            'batch_tokens_y': ys.numel(),
-            'num_samples': xs.shape[0]
         }
 
 

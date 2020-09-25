@@ -1,3 +1,4 @@
+
 # thseq
 
 thseq is a PyTorch-based sequence modeling toolkit mainly focusing on Neural Machine Translation.
@@ -14,8 +15,9 @@ thseq is a PyTorch-based sequence modeling toolkit mainly focusing on Neural Mac
 
 ## Requirements
 
-+ torch==1.3.0+
++ pytorch==1.6.0+
 + Lunas=0.4.0+
++ numba
 
 thseq partially builds upon [Lunas](https://github.com/pluiez/Lunas/),  a stand-alone data processing library offering concise APIs and logics for processing arbitrary input formats (e.g., image and text), highly customizable, easy to use and worth a try!
 
