@@ -102,11 +102,11 @@ Here we take WMT'14 English-French translation as an example to train a Transfor
     --warmup-init-lr 1e-7 \
     --warmup-steps 4000 \
     --optimizer adam \
-  --num-workers 6 \
+    --num-workers 6 \
     --max-tokens 8333 \ # effective batch size is (max_tokens * dist_world_size * accumulate)
-  --dist-world-size 3 \ # number of available GPUs
+    --dist-world-size 3 \ # number of available GPUs
     --accumulate 1 \
-  --seed 9527 \ 
+    --seed 9527 \ 
     --save-checkpoint-steps 2000 \
     --save-checkpoint-secs 0 \
     --save-checkpoint-epochs 1 \
@@ -126,8 +126,6 @@ Here we take WMT'14 English-French translation as an example to train a Transfor
     --val-max-tokens 4096 \ # validation batch-size
     --fp16 half \ # mixed-precision training: none/half/amp
     > log.train 2>&1 
-    
-    
     ```
     
     Type `python train.py -h` for more available options for model, optimizer, lr_scheduler, dataset, etc.
@@ -139,9 +137,9 @@ Here we take WMT'14 English-French translation as an example to train a Transfor
     ```shell
     python generate.py $DATA/test14.en \
     -k 4 \ beam size
---alpha 1.0 \ length penalty
+    --alpha 1.0 \ length penalty
     --max-tokens 8192 \ # maximum source tokens per batch
---checkpoints enfr-base/ckp.S00100000.pt \ # pass multiple checkpoints for ensembled decoding
+    --checkpoints enfr-base/ckp.S00100000.pt \ # pass multiple checkpoints for ensembled decoding
     --num-workers 0 \
     > mt.test14.fr
     ```
