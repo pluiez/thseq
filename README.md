@@ -152,7 +152,7 @@ Here we take WMT'14 English-French translation as an example to train a Transfor
   |                                                          | newstest2014 (tok./ detok. BLEU) | wps/sps/wall |
   | -------------------------------------------------------- | -------------------------------- | ------------ |
   | [Vaswani et al., 2017](https://arxiv.org/abs/1706.03762) | 38.1/NaN                         | /            |
-  | thseq                                                    | 39.94/36.9                       | /            |
+  | thseq                                                    | 39.94/36.9                       | 2346.3/82.9/36.2|
 
   - wps: decoding speed measured in word per second.
 
